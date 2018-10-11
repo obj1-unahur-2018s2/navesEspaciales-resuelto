@@ -1,26 +1,26 @@
-import uni2.*
+import universidades.*
 import profesionales.*
 
 describe "muchos tests" {
 
-	const unahur = new UniversidadCampeona()
-	const unsam = new UniversidadCampeona(provincia = "Buenos Aires", honorariosPorHora = 5000)
+	const unahur = new Universidad()
+	const unsam = new Universidad(provincia = "Buenos Aires", honorarioRecomendado = 5000)
 	const pepe = new ProfesionalVinculado()
 	const juan = new ProfesionalAsociado()
 
 	fixture {
 		unahur.provincia("Buenos Aires")
-		unahur.honorariosPorHora(3000)
+		unahur.honorarioRecomendado(3000)
 		pepe.universidad(unsam)
 	}
 
 	test "pepe" {
-		assert.that(pepe.cubreProvincia("Corrientes"))
-		assert.notThat(pepe.cubreProvincia("Buenos Aires"))
+		assert.that(juan.cubreProvincia("Corrientes"))
+		assert.notThat(juan.cubreProvincia("Buenos Aires"))
 	}
 
 	test "juan" {
-		assert.that(juan.cubreProvincia("Buenos Aires"))
-		assert.notThat(juan.cubreProvincia("Corrientes"))
+		assert.that(pepe.cubreProvincia("Buenos Aires"))
+		assert.notThat(pepe.cubreProvincia("Corrientes"))
 	}
 }
