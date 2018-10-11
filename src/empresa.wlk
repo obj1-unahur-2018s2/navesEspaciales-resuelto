@@ -8,8 +8,19 @@ class EmpresaDeServicios {
 	
 	method profesionalesCaros() = profesionales.filter { prof => prof.honorariosPorHora() > honorarioReferencia }
 	method universidadesFormadoras() = profesionales.map { prof => prof.universidad() }.asSet()
-	method profesionalMasBarato() = profesionales.min { prof => prof.honorariosPorHora() }
-	method esProvinciaCubierta(prov) = profesionales.any { prof => prof.provinciasDondePuedeTrabajar().contains(prov) }
+	
+	
+	method estaCubierta2(prov) {
+		return profesionales.any { prof => prof.provinciasDondePuedeTrabajar().contains(prov) }
+	}
+	method estaCubierta(prov) {
+		return profesionales.any { prof => prof.cubreProvincia(prov) }
+	}
+	
+	
+	method profesionalMasBarato() { 
+		return profesionales.min { prof => prof.honorariosPorHora() }
+	}
 	method esPocoAtractivo(prof) = prof.provinciasDondePuedeTrabajar().all {
 		prov => profesionales.any { 
 			prof2 => prof2.provinciasDondePuedeTrabajar().contains(prov) 
